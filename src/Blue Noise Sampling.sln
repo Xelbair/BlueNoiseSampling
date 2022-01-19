@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32002.185
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueNoiseSampling", "BlueNoiseSampling\BlueNoiseSampling.csproj", "{E8493581-0DCF-41C7-94B7-02FBC5461D1A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlueNoiseSampling.Testbed", "BlueNoiseSampling.Testbed\BlueNoiseSampling.Testbed.csproj", "{966C7585-6C15-467F-80C2-94858506B647}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8493581-0DCF-41C7-94B7-02FBC5461D1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8493581-0DCF-41C7-94B7-02FBC5461D1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8493581-0DCF-41C7-94B7-02FBC5461D1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8493581-0DCF-41C7-94B7-02FBC5461D1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{966C7585-6C15-467F-80C2-94858506B647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{966C7585-6C15-467F-80C2-94858506B647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{966C7585-6C15-467F-80C2-94858506B647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{966C7585-6C15-467F-80C2-94858506B647}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F563AD86-0789-4DE1-84E4-70DA16CE1935}
+	EndGlobalSection
+EndGlobal

@@ -12,7 +12,7 @@ namespace BlueNoiseSampling.Testbed
             if (args is null || args.Length == 0) args = new string[1] { "test.jpg" };
 
             string testFile = args[0];
-            double percentageOfPoints = 0.01;
+            double percentageOfPoints = 0.10;
             uint maxCandidates = 10;
             using var img = Bitmap.FromFile(testFile);
             using var bmp = new Bitmap(img);
@@ -29,7 +29,7 @@ namespace BlueNoiseSampling.Testbed
 
             //Initialize the sampler and sample the image
             var rng = new CachingCryptoStableRNG();
-            var sampler = new PoissonDiskSampler(rng,()=>new SpatialList(),maxCandidates, (uint)Math.Round(bmp.Width * bmp.Height * percentageOfPoints));
+            var sampler = new PoissonDiskSampler(rng,()=>new KDTree(),maxCandidates, (uint)Math.Round(bmp.Width * bmp.Height * percentageOfPoints));
             var result = sampler.Sample(points.ToArray());
 
             //write the result

@@ -11,15 +11,14 @@ namespace BlueNoiseSampling
     public sealed class PoissonDiskSampler
     {
         IRng _rng;
-        ISpatialStorage _mitchellPoints;
         uint _maxCandidates;
         uint _maxPoints;
-
+        Func<ISpatialStorage> _storageConstructor;
 
         public PoissonDiskSampler(IRng rng, Func<ISpatialStorage> StorageConstructor, uint maxCandidates, uint maxPoints)
         {
             _rng=rng;
-            _mitchellPoints=StorageConstructor();
+            _storageConstructor=StorageConstructor;
             _maxCandidates=maxCandidates;
             _maxPoints=maxPoints;
         }
@@ -31,21 +30,22 @@ namespace BlueNoiseSampling
         /// <returns></returns>
         public IList<IPoint> Sample(IPoint[] points)
         {
+            ISpatialStorage mitchellPoints = _storageConstructor();
             //best case scenario fastpath
             if (_maxCandidates >= points.Length)
             {
                 foreach (var item in points)
                 {
-                    _mitchellPoints.Add(item);
+                    mitchellPoints.Add(item);
                 }
-                return _mitchellPoints.ToList();
+                return mitchellPoints.ToList();
             }
 
             double maxDistance; int maxDistIndex;
-            //Collection initialization and choosing the first oint
-            _mitchellPoints.Clear();
+            //Collection initialization and choosing the first point
+            mitchellPoints.Clear();
             IPoint[] candidates = new IPoint[_maxCandidates];
-            _mitchellPoints.Add(_rng.PickRandomElement(points));
+            mitchellPoints.Add(_rng.PickRandomElement(points));
             int selectedPointsCounter = 1;
 
             do
@@ -61,17 +61,17 @@ namespace BlueNoiseSampling
                 for (int i = 0; i < _maxCandidates; i++)
                 {
                     var candidate = candidates[i];
-                    var distance = _mitchellPoints.DistanceSquared(candidate);
+                    var distance = mitchellPoints.DistanceSquared(candidate);
                     if (maxDistance < distance)
                     { maxDistance = distance; maxDistIndex = i; }
                 }
-                _mitchellPoints.Add(candidates[maxDistIndex]);
+                mitchellPoints.Add(candidates[maxDistIndex]);
 
                 //increment counter and send progress event
                 selectedPointsCounter += 1;
             } while (selectedPointsCounter < _maxPoints);
 
-            return _mitchellPoints.ToList();
+            return mitchellPoints.ToList();
         }
 
         public IList<IPoint<T>> Sample<T>(IPoint<T>[] points) => Sample((IPoint[])points).Cast<IPoint<T>>().ToList();
